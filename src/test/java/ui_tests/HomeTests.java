@@ -1,4 +1,4 @@
-package utils;
+package ui_tests;
 
 import manager.ApplicationManager;
 import org.testng.annotations.Test;
