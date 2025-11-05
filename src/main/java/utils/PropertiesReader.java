@@ -7,12 +7,13 @@ import java.util.Properties;
 
 public class PropertiesReader {
     public static void main(String[] args) {
-        System.out.println(getProperty("base.properties","login"));
+
+         System.out.println(getProperty("base.properties","userName"));
     }
     public static String getProperty(String filename,String key){
         Properties properties= new Properties();
         try(FileInputStream fileInputStream=
-                    new FileInputStream("src/test/resources"+File.separator+filename)){
+                    new FileInputStream("src/test/properties"+File.separator+filename)){
             properties.load(fileInputStream);
             return properties.getProperty(key);
         }catch (IOException e){
