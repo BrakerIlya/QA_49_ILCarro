@@ -19,7 +19,7 @@ public class ApplicationManager {
     }
     @BeforeMethod
     public void setup(){
-        logger.info("Start testing"+ LocalDate.now() + LocalTime.now());
+//        logger.info("Start testing"+ LocalDate.now() + LocalTime.now());
         driver =new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class HomePage extends BasePage{
     public HomePage(WebDriver driver){
@@ -60,5 +62,40 @@ public class HomePage extends BasePage{
         inputDates.sendKeys(dates);
         //clickWait(btnYalla, 3);
         btnYalla.click();
+    }
+    @FindBy(xpath = "//button[@aria-label='Choose month and year']")
+    WebElement calendarBtnYear;
+    private String monthCreate(String month){
+        StringBuilder result =new StringBuilder();
+        return result.append(month.substring(0,1).toUpperCase())
+                .append(month.substring(1).toLowerCase()).toString();
+
+    }
+    private void typeCalendar(LocalDate date){
+        calendarBtnYear.click();
+        String year = Integer.toString(date.getYear());  //2025   2026
+        WebElement btnYear = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
+        //  "//td[@aria-label='"+year+"']" --> "//td[@aria-label='"   "2026"   "']" -->  //td[@aria-label='2026']
+        btnYear.click();
+        String month = date.getMonth().toString();
+        month=monthCreate(month);
+        WebElement btnMonth = driver.findElement(By.xpath("//td[@aria-label='"+month+" "+year+"']"));
+        btnMonth.click();
+        String day= String.valueOf(date.getDayOfMonth());
+        String date1= month+" "+day+", " + year;
+        WebElement btnDay = driver.findElement(
+                By.xpath("//td[@aria-label='"+date1+"']"));
+        btnDay.click();
+
+    }
+    public void typeSearchFormCalendar(String city, LocalDate dateFrom,LocalDate dateTo) {
+        inputCity.sendKeys(city);
+        inputDates.click();
+        typeCalendar(dateFrom);
+        typeCalendar(dateTo);
+        JavascriptExecutor js=(JavascriptExecutor) driver;
+        js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute(\"disabled\")");
+        btnYalla.click();
+
     }
 }
