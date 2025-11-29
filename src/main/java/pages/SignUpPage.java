@@ -12,7 +12,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import javax.swing.*;
 
 import static pages.BasePage.driver;
-import static pages.BasePage.setDriver;
+
 
 public class SignUpPage extends BasePage {
 

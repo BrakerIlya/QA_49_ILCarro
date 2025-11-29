@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import utils.TestNGListener;
 
-@Listeners(TestNGListener.class)
+//@Listeners(TestNGListener.class)
 public class HomeTests extends ApplicationManager {
     @Test
     public void startTest(){

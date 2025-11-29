@@ -15,12 +15,16 @@ import java.util.List;
 
 public abstract class BasePage {
     static WebDriver driver;
-    public static void setDriver(WebDriver wd){
-        driver=wd;
+    public static void setDriver(WebDriver wd){driver=wd;}
 
-    }
+
     @FindBy(css="div[class='error']")
     List<WebElement> listErrorElements;
+    @FindBy(xpath = "//button[text()=\"Ok\"]")
+    WebElement btnOk;
+    @FindBy(xpath = "//div[contains(@class,'error']")
+    List<WebElement>listErrorElement;
+
 
     public boolean isTextInErrorPresent(String text){
         if(listErrorElements==null || listErrorElements.isEmpty())

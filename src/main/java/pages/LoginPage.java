@@ -22,6 +22,8 @@ public class LoginPage extends BasePage {
     WebElement popUpTestLogged;
     @FindBy(xpath ="//h2[text()='\"Login or Password incorrect\"']" )
     WebElement popUpTextLoggedIncorrect;
+    @FindBy(xpath = "//button[text()=\"Ok\"]")
+    WebElement btnOk;
     public void typeLoginForm(User user){
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
@@ -37,4 +39,8 @@ public class LoginPage extends BasePage {
         return elementIsEnabled(btnYalla);
     }
 
+    public void clickBtnOk() {
+        clickWait(btnOk,3);
+
+    }
 }

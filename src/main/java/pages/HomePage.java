@@ -7,7 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.PropertiesReader;
+import utils.enums.FooterMenuItem;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Locale;
 
@@ -15,6 +21,7 @@ public class HomePage extends BasePage{
     public HomePage(WebDriver driver){
         setDriver(driver);
         driver.get("https://ilcarro.web.app/search");
+ //       driver.get(PropertiesReader.getProperty("base.properties", "baseUrl"));
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
 
     }
@@ -96,6 +103,13 @@ public class HomePage extends BasePage{
         JavascriptExecutor js=(JavascriptExecutor) driver;
         js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute(\"disabled\")");
         btnYalla.click();
+
+    }
+
+    public boolean clickFooterItem(FooterMenuItem item,String title) {
+        driver.findElement(By.cssSelector(item.getLocator())).click();
+        return new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.titleContains(title));
 
     }
 }
